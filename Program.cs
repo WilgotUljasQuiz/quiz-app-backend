@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using quiz_app_backend.Models;
+using quiz_app_backend.IServices;
+using quiz_app_backend.Services;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +13,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<DataContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase"));
+});
+
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IQuizService, QuizService>();
+builder.Services.AddTransient<IMailService, MailService>();
+
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
