@@ -66,7 +66,7 @@ namespace quiz_app_backend.Controllers
             else return BadRequest(_forgotPassword.Item1);
         }
 
-        [HttpPut("resetPassword")]
+        [HttpPatch("resetPassword")]
         public async Task<IActionResult> ResetPassword(PasswordResetDto passwordResetDto)
         {
             var _resetPassword = await _userService.ResetPassword(passwordResetDto);

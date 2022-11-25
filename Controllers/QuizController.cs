@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using quiz_app_backend.IServices;
 using quiz_app_backend.Models;
+using quiz_app_backend.Dtos;
 
 namespace quiz_app_backend.Controllers
 {
@@ -27,18 +28,16 @@ namespace quiz_app_backend.Controllers
         }
 
         [HttpGet("getQuestions")]
-        public async Task<IActionResult> GetQuestions(string quizId)
+        public async Task<IEnumerable<Question>> GetQuestions(GetByIdDto getByIdDto)
         {
-           return Ok("Quizzes");
+           return await _quizService.GetQuestions(getByIdDto);
         }
 
         [HttpGet("getAnswers")]
-        public async Task<IActionResult> GetAnswers(string questionId)
+        public async Task<IEnumerable<Answer>> GetAnswers(GetByIdDto getByIdDto)
         {
-           return Ok("Quizzes");
+           return await _quizService.GetAnswers(getByIdDto);
         }
-
-        
 
     }
 }
