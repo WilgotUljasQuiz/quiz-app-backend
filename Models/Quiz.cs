@@ -11,6 +11,6 @@ namespace quiz_app_backend.Models
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public User? User { get; set; }
-
+        public ICollection<Question> Questions { get; set; }
     }
 }

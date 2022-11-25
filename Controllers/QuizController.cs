@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using quiz_app_backend.IServices;
+using quiz_app_backend.Models;
 
 namespace quiz_app_backend.Controllers
 {
@@ -19,10 +20,10 @@ namespace quiz_app_backend.Controllers
             _quizService = quizService;
         }
 
-        [HttpGet("getQuizes")]
-        public async Task<IActionResult> GetQuizes()
+        [HttpGet("getQuizzes")]
+        public async Task<IEnumerable<Quiz>> GetQuizzes()
         {
-           return Ok("Quizzes");
+           return await _quizService.GetQuizzes();
         }
 
         [HttpGet("getQuestions")]
