@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace quiz_app_backend.Dtos
 {
-    public class GetByIdDto
+    public class SendStringDto
     {
-        public string Id { get; set; }
+        public string String { get; set; }
 
     }
 }

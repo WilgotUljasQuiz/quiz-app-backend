@@ -12,8 +12,8 @@ using quiz_app_backend.Models;
 namespace quizappbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221125154639_V2")]
-    partial class V2
+    [Migration("20221126143931_V1")]
+    partial class V1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,26 @@ namespace quizappbackend.Migrations
                     b.HasIndex("questionId");
 
                     b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("quiz_app_backend.Models.Game", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("QuizId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("quiz_app_backend.Models.Question", b =>
@@ -85,6 +105,27 @@ namespace quizappbackend.Migrations
                     b.ToTable("Quizzes");
                 });
 
+            modelBuilder.Entity("quiz_app_backend.Models.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("AnswerCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Scores");
+                });
+
             modelBuilder.Entity("quiz_app_backend.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -119,10 +160,25 @@ namespace quizappbackend.Migrations
             modelBuilder.Entity("quiz_app_backend.Models.Answer", b =>
                 {
                     b.HasOne("quiz_app_backend.Models.Question", "Question")
-                        .WithMany()
+                        .WithMany("Answers")
                         .HasForeignKey("questionId");
 
                     b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("quiz_app_backend.Models.Game", b =>
+                {
+                    b.HasOne("quiz_app_backend.Models.Quiz", "Quiz")
+                        .WithMany("Games")
+                        .HasForeignKey("QuizId");
+
+                    b.HasOne("quiz_app_backend.Models.User", "User")
+                        .WithMany("Games")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Quiz");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("quiz_app_backend.Models.Question", b =>
@@ -143,13 +199,36 @@ namespace quizappbackend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("quiz_app_backend.Models.Score", b =>
+                {
+                    b.HasOne("quiz_app_backend.Models.Game", "Game")
+                        .WithMany("Scores")
+                        .HasForeignKey("GameId");
+
+                    b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("quiz_app_backend.Models.Game", b =>
+                {
+                    b.Navigation("Scores");
+                });
+
+            modelBuilder.Entity("quiz_app_backend.Models.Question", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
             modelBuilder.Entity("quiz_app_backend.Models.Quiz", b =>
                 {
+                    b.Navigation("Games");
+
                     b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("quiz_app_backend.Models.User", b =>
                 {
+                    b.Navigation("Games");
+
                     b.Navigation("Quizzes");
                 });
 #pragma warning restore 612, 618
