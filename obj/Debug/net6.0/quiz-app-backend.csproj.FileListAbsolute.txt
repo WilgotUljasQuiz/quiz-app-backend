@@ -171,3 +171,7 @@ C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\quiz-app-bac
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\quiz-app-backend.genruntimeconfig.cache
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\ref\quiz-app-backend.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings.Development.json
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Scrutor.dll
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
