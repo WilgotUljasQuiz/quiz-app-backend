@@ -19,25 +19,21 @@ public class QuizService : IQuizService
         return (Task<IEnumerable<Quiz>>)quizzes;
     }
 
-    public Task<IEnumerable<Question>> GetQuestions(SendStringDto getByIdDto)
+    public Task<IEnumerable<Question>> GetQuestions(string QuizId)
     {
-        IEnumerable<Question> quizzes = from Question in  _context.Questions where Question.Id == getByIdDto.String select Question;
+        IEnumerable<Question> quizzes = from Question in  _context.Questions where Question.Id == QuizId select Question;
         return (Task<IEnumerable<Question>>)quizzes;
     }
 
-    public Task<IEnumerable<Answer>> GetAnswers(SendStringDto getByIdDto)
-    {
-        IEnumerable<Answer> answers = from Answer in _context.Answers where Answer.Id == getByIdDto.String select Answer;
-        return (Task<IEnumerable<Answer>>)answers;
-    }
 
-    public string CreateQuiz(SendStringDto getByIdDto, string userId)
+
+    public string CreateQuiz(CreateQuizDto createQuestionDto)
     {
         var quiz = new Quiz
         {
             Id = Nanoid.Nanoid.Generate(),
-            QuizName = getByIdDto.String,
-            UserId = userId
+            QuizName = createQuestionDto.QuizName,
+            UserId = createQuestionDto.userId
         };
         _context.Quizzes.Add(quiz);
 

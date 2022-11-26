@@ -31,23 +31,18 @@ namespace quiz_app_backend.Controllers
         }
 
         [HttpGet("getQuestions")]
-        public async Task<IEnumerable<Question>> GetQuestions(SendStringDto getByIdDto)
+        public async Task<IEnumerable<Question>> GetQuestions(string quizId)
         {
-           return await _quizService.GetQuestions(getByIdDto);
+           return await _quizService.GetQuestions(quizId);
         }
 
-        [HttpGet("getAnswers")]
-        public async Task<IEnumerable<Answer>> GetAnswers(SendStringDto getByIdDto)
-        {
-           return await _quizService.GetAnswers(getByIdDto);
-        }
 
         [HttpPost("createQuiz"), Authorize]
-        public async Task<IEnumerable<Answer>> CreateQuiz(SendStringDto stringDto, string UserId)
+        public async Task<string> CreateQuiz(CreateQuizDto createQuizDto)
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return await _quizService.GetAnswers(stringDto);
+            return _quizService.CreateQuiz(createQuizDto);
         }
 
         [HttpPost("createQuestion"), Authorize]

@@ -11,9 +11,8 @@ namespace quiz_app_backend.IServices
     public interface IQuizService
     {
         Task<IEnumerable<Quiz>> GetQuizzes();
-        Task<IEnumerable<Question>> GetQuestions(SendStringDto getByIdDto);
-        Task<IEnumerable<Answer>> GetAnswers(SendStringDto getByIdDto);
-        string CreateQuiz(SendStringDto getByIdDto, string userId);
+        Task<IEnumerable<Question>> GetQuestions(string quizId);
+        string CreateQuiz(CreateQuizDto createQuestionDto);
         string CreateQuestion(CreateQuestionDto createQuestionDto);
 
     }
