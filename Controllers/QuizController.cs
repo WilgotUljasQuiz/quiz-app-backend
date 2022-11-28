@@ -42,7 +42,8 @@ namespace quiz_app_backend.Controllers
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return _quizService.CreateQuiz(createQuizDto);
+
+            return _quizService.CreateQuiz(createQuizDto, Id);
         }
 
         [HttpPost("createQuestion"), Authorize]

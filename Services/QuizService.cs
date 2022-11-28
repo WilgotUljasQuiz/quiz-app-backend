@@ -27,15 +27,17 @@ public class QuizService : IQuizService
 
 
 
-    public string CreateQuiz(CreateQuizDto createQuestionDto)
+    public string CreateQuiz(CreateQuizDto createQuestionDto, string UserId)
     {
         var quiz = new Quiz
         {
             Id = Nanoid.Nanoid.Generate(),
             QuizName = createQuestionDto.QuizName,
-            UserId = createQuestionDto.userId
+            UserId = UserId
         };
         _context.Quizzes.Add(quiz);
+        _context.SaveChanges();
+        _context.SaveChanges();
 
         return quiz.Id;
     }
@@ -58,10 +60,11 @@ public class QuizService : IQuizService
                 IsCorrect = item.IsCorrect,
                 questionId = item.QuestionId,
             };
-            question.Answers.Add(answer);
+            question.Answers = new List<Answer> { answer };
         }
 
         _context.Questions.Add(question);
+        _context.SaveChanges();
        
         return question.Id;
     }

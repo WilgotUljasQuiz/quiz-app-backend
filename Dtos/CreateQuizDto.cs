@@ -8,6 +8,5 @@ namespace quiz_app_backend.Dtos
     public class CreateQuizDto
     {
         public string QuizName{ get; set; }
-        public string userId { get; set; }
     }
 }

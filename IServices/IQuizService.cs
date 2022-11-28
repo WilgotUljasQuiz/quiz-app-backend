@@ -12,7 +12,7 @@ namespace quiz_app_backend.IServices
     {
         Task<IEnumerable<Quiz>> GetQuizzes();
         Task<IEnumerable<Question>> GetQuestions(string quizId);
-        string CreateQuiz(CreateQuizDto createQuestionDto);
+        string CreateQuiz(CreateQuizDto createQuestionDto, string UserId);
         string CreateQuestion(CreateQuestionDto createQuestionDto);
         string CreateGame(string QuizId, string UserId);
 
