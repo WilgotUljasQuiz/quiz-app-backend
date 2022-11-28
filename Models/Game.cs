@@ -10,7 +10,6 @@ namespace quiz_app_backend.Models
         public string? QuizId { get; set; }
         [ForeignKey("QuizId")]
         public Quiz? Quiz { get; set; }
-
         public string? UserID { get; set; }
         [ForeignKey("UserID")]
         public User? User { get; set; }

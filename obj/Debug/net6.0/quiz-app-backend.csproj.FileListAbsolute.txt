@@ -156,11 +156,6 @@ C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\quiz-app-bac
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\quiz-app-backend.csproj.CoreCompileInputs.cache
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\quiz-app-backend.MvcApplicationPartsAssemblyInfo.cs
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\quiz-app-backend.MvcApplicationPartsAssemblyInfo.cache
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.quiz-app-backend.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.build.quiz-app-backend.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.quiz-app-backend.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.quiz-app-backend.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets.build.json
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets.development.json
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\scopedcss\bundle\quiz-app-backend.styles.css

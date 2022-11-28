@@ -66,5 +66,17 @@ public class QuizService : IQuizService
         return question.Id;
     }
 
-  
+    public string CreateGame(string QuizId, string UserId)
+    {
+        var _game = new Game{
+            Id = Nanoid.Nanoid.Generate(),
+            QuizId = QuizId,
+            UserID = UserId
+        };
+
+        _context.Add(_game);
+        _context.SaveChanges();
+        
+        return _game.Id;
+    }
 }

@@ -51,5 +51,12 @@ namespace quiz_app_backend.Controllers
             return _quizService.CreateQuestion(createQuestionDto);
         }
 
+        [HttpPost("createGame"), Authorize]
+        public async Task<string> CreateGame(string QuizId)
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return _quizService.CreateGame(QuizId, Id);
+        }
     }
 }

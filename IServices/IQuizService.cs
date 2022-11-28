@@ -14,6 +14,8 @@ namespace quiz_app_backend.IServices
         Task<IEnumerable<Question>> GetQuestions(string quizId);
         string CreateQuiz(CreateQuizDto createQuestionDto);
         string CreateQuestion(CreateQuestionDto createQuestionDto);
+        string CreateGame(string QuizId, string UserId);
+
 
     }
 }
