@@ -19,10 +19,10 @@ public class QuizService : IQuizService
         return quizzes;
     }
 
-    public Task<IEnumerable<Question>> GetQuestions(string QuizId)
+    public IEnumerable<string> GetQuestionIds(string QuizId)
     {
-        IEnumerable<Question> quizzes = from Question in  _context.Questions where Question.Id == QuizId select Question;
-        return (Task<IEnumerable<Question>>)quizzes;
+        IEnumerable<string> quizzes = from Question in  _context.Questions where Question.Id == QuizId select Question.Id;
+        return quizzes;
     }
 
 

@@ -30,10 +30,10 @@ namespace quiz_app_backend.Controllers
            return _quizService.GetQuizzes();
         }
 
-        [HttpGet("getQuestions")]
-        public async Task<IEnumerable<Question>> GetQuestions(string quizId)
+        [HttpGet("getQuestionIds")]
+        public IEnumerable<string> GetQuestionIds(string quizId)
         {
-           return await _quizService.GetQuestions(quizId);
+           return _quizService.GetQuestionIds(quizId);
         }
 
 
