@@ -13,6 +13,7 @@ namespace quiz_app_backend.IServices
     {
         IEnumerable<Quiz> GetQuizzes();
         IEnumerable<string> GetQuestionIds(string quizId);
+        Question GetQuestion(string questionId);
         string CreateQuiz(CreateQuizDto createQuestionDto, string UserId);
         string CreateQuestion(CreateQuestionDto createQuestionDto);
         string CreateGame(string QuizId, string UserId);

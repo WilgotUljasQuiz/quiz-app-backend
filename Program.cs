@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using quiz_app_backend.Models;
 using quiz_app_backend.IServices;
 using quiz_app_backend.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,6 +24,11 @@ builder.Services.AddCors(options =>
 
                           });
 });
+
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -36,6 +36,12 @@ namespace quiz_app_backend.Controllers
            return _quizService.GetQuestionIds(quizId);
         }
 
+        [HttpGet("getQuestion")]
+        public Question GetQuestion(string questionId)
+        {
+           return _quizService.GetQuestion(questionId);
+        }
+
 
         [HttpPost("createQuiz"), Authorize]
         public async Task<string> CreateQuiz(CreateQuizDto createQuizDto)

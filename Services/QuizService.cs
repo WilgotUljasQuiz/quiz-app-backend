@@ -1,6 +1,7 @@
 ﻿using quiz_app_backend.IServices;
 using quiz_app_backend.Models;
 using quiz_app_backend.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 public class QuizService : IQuizService
 {
@@ -21,11 +22,18 @@ public class QuizService : IQuizService
 
     public IEnumerable<string> GetQuestionIds(string QuizId)
     {
-        IEnumerable<string> quizzes = from Question in  _context.Questions where Question.Id == QuizId select Question.Id;
+        IEnumerable<string> quizzes = from Question in  _context.Questions where Question.QuizId == QuizId select Question.Id;
         return quizzes;
     }
 
+    public Question GetQuestion(string QuestionId)
+    {
+        Question question = _context.Questions
+                    .Where(b => b.Id == QuestionId).Include(b => b.Answers)
+                    .FirstOrDefault();
 
+        return question;
+    }
 
     public string CreateQuiz(CreateQuizDto createQuestionDto, string UserId)
     {
