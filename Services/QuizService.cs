@@ -28,7 +28,7 @@ public class QuizService : IQuizService
 
     public Question GetQuestion(string QuestionId)
     {
-        Question question = _context.Questions
+        var question = _context.Questions
                     .Where(b => b.Id == QuestionId).Include(b => b.Answers)
                     .FirstOrDefault();
 
@@ -91,4 +91,41 @@ public class QuizService : IQuizService
         
         return _game.Id;
     }
+
+    public string SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId)
+    {
+        bool AnswerCorrect = false;
+        
+        var game = _context.Games
+                    .Where(b => b.Id == submitAnswerDto.GameId)
+                    .FirstOrDefault();
+
+        if(game.UserID == UserId){
+
+            var answer = _context.Answers.Where(b => b.Id == submitAnswerDto.AnswerId).FirstOrDefault();
+            if(answer.IsCorrect){
+                AnswerCorrect = true;
+            }
+                
+            var score = new Score{
+                Id = Nanoid.Nanoid.Generate(),
+                AnswerCorrect = AnswerCorrect,
+                GameId = submitAnswerDto.GameId,
+            };
+            _context.Add(score);
+            _context.SaveChanges();
+            if(AnswerCorrect){
+                return "Correct Answer";
+
+            }
+            else{
+                return "Not Correct Answer";
+            }
+        }
+        return "Not your game";
+
+
+    }
+    
+
 }

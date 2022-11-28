@@ -17,7 +17,7 @@ namespace quiz_app_backend.IServices
         string CreateQuiz(CreateQuizDto createQuestionDto, string UserId);
         string CreateQuestion(CreateQuestionDto createQuestionDto);
         string CreateGame(string QuizId, string UserId);
-
+        string SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId);
 
     }
 }
