@@ -57,6 +57,7 @@ public class QuizService : IQuizService
             Id = Nanoid.Nanoid.Generate(),
             Title = createQuestionDto.Title,
             QuizId= createQuestionDto.QuizId,
+            Answers = new List<Answer>()
         };
 
         foreach (var item in createQuestionDto.createAnswerDtos)
@@ -68,7 +69,7 @@ public class QuizService : IQuizService
                 IsCorrect = item.IsCorrect,
                 questionId = item.QuestionId,
             };
-            question.Answers = new List<Answer> { answer };
+            question.Answers.Add(answer);
         }
 
         _context.Questions.Add(question);
