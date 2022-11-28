@@ -13,10 +13,10 @@ public class QuizService : IQuizService
         _configuration = configuration;
         _context = context;
     }
-    public Task<IEnumerable<Quiz>> GetQuizzes()
+    public IEnumerable<Quiz> GetQuizzes()
     {
         IEnumerable<Quiz> quizzes = from Quiz in _context.Quizzes select Quiz;
-        return (Task<IEnumerable<Quiz>>)quizzes;
+        return quizzes;
     }
 
     public Task<IEnumerable<Question>> GetQuestions(string QuizId)

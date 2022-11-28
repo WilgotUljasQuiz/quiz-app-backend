@@ -10,7 +10,7 @@ namespace quiz_app_backend.IServices
 {
     public interface IQuizService
     {
-        Task<IEnumerable<Quiz>> GetQuizzes();
+        IEnumerable<Quiz> GetQuizzes();
         Task<IEnumerable<Question>> GetQuestions(string quizId);
         string CreateQuiz(CreateQuizDto createQuestionDto, string UserId);
         string CreateQuestion(CreateQuestionDto createQuestionDto);

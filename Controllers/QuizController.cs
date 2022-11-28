@@ -25,9 +25,9 @@ namespace quiz_app_backend.Controllers
         }
 
         [HttpGet("getQuizzes")]
-        public async Task<IEnumerable<Quiz>> GetQuizzes()
+        public IEnumerable<Quiz> GetQuizzes()
         {
-           return await _quizService.GetQuizzes();
+           return _quizService.GetQuizzes();
         }
 
         [HttpGet("getQuestions")]
