@@ -12,6 +12,7 @@ namespace quiz_app_backend.IServices
     public interface IQuizService
     {
         IEnumerable<Quiz> GetQuizzes();
+        IEnumerable<Quiz> GetMyQuizzes(string UserId);
         IEnumerable<string> GetQuestionIds(string quizId);
         Question GetQuestion(string questionId);
         string CreateQuiz(CreateQuizDto createQuestionDto, string UserId);

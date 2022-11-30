@@ -30,6 +30,15 @@ namespace quiz_app_backend.Controllers
            return _quizService.GetQuizzes();
         }
 
+        [HttpGet("getMyQuizzes"), Authorize]
+        public IEnumerable<Quiz> GetMyQuizzes()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return _quizService.GetMyQuizzes(Id);
+        }
+        
+
         [HttpGet("getQuestionIds")]
         public IEnumerable<string> GetQuestionIds(string quizId)
         {

@@ -20,6 +20,12 @@ public class QuizService : IQuizService
         return quizzes;
     }
 
+    public IEnumerable<Quiz> GetMyQuizzes(string UserId)
+    {
+        IEnumerable<Quiz> quizzes = from Quiz in _context.Quizzes where Quiz.UserId == UserId select Quiz;
+        return quizzes;
+    }
+
     public IEnumerable<string> GetQuestionIds(string QuizId)
     {
         IEnumerable<string> quizzes = from Question in _context.Questions where Question.QuizId == QuizId select Question.Id;
@@ -168,4 +174,6 @@ public class QuizService : IQuizService
         return finishGameDto;
 
     }
+
+
 }
