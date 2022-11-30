@@ -73,5 +73,13 @@ namespace quiz_app_backend.Controllers
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return _quizService.SubmitAnswer(submitAnswerDto, Id);
         }
+
+        [HttpPost("finishGame"), Authorize]
+        public async Task<FinishGameDto> FinishGame(string GameId)
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return _quizService.FinishGame(GameId, Id);
+        }
     }
 }

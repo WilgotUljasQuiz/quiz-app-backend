@@ -143,5 +143,29 @@ public class QuizService : IQuizService
 
     }
 
+    public FinishGameDto FinishGame(string GameId, string UserId)
+    {
+        var game = _context.Games
+                    .Where(b => b.Id == GameId)
+                    .FirstOrDefault();
 
+        
+        var quiz = _context.Quizzes
+                .Where(b => b.Id == game.QuizId)
+                .FirstOrDefault();
+
+        IEnumerable<Score> scores = from Score in _context.Scores where Score.GameId == GameId || Score.AnswerCorrect == true select Score;
+
+        IEnumerable<string> questions = from Question in _context.Questions where Question.QuizId == quiz.Id select Question.Id;
+
+        var finishGameDto = new FinishGameDto
+        {
+            YourScore = scores.Count(),
+            TotalQuestions = questions.Count()
+        };
+
+        //Todo: Set game to finished
+        return finishGameDto;
+
+    }
 }
