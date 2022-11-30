@@ -12,7 +12,7 @@ using quiz_app_backend.Models;
 namespace quizappbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221126143931_V1")]
+    [Migration("20221130200542_V1")]
     partial class V1
     {
         /// <inheritdoc />
@@ -107,11 +107,8 @@ namespace quizappbackend.Migrations
 
             modelBuilder.Entity("quiz_app_backend.Models.Score", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("AnswerCorrect")
                         .HasColumnType("bit");
