@@ -106,28 +106,34 @@ public class QuizService : IQuizService
             {
 
                 var answer = _context.Answers.Where(b => b.Id == submitAnswerDto.AnswerId).FirstOrDefault();
-                if (answer.IsCorrect)
+                if (answer != null)
                 {
-                    AnswerCorrect = true;
-                }
+                    if (answer.IsCorrect)
+                    {
+                        AnswerCorrect = true;
+                    }
 
-                var score = new Score
-                {
-                    Id = Nanoid.Nanoid.Generate(),
-                    AnswerCorrect = AnswerCorrect,
-                    GameId = submitAnswerDto.GameId,
-                };
-                _context.Add(score);
-                _context.SaveChanges();
-                if (AnswerCorrect)
-                {
-                    return "Correct Answer";
+                    var score = new Score
+                    {
+                        Id = Nanoid.Nanoid.Generate(),
+                        AnswerCorrect = AnswerCorrect,
+                        GameId = submitAnswerDto.GameId,
+                    };
+                    _context.Add(score);
+                    _context.SaveChanges();
+                    if (AnswerCorrect)
+                    {
+                        return "Correct Answer";
 
+                    }
+                    else
+                    {
+                        return "Not Correct Answer";
+                    }
                 }
-                else
-                {
-                    return "Not Correct Answer";
-                }
+                else return "Answer does not exist";
+
+
             }
             return "Not your game";
 
