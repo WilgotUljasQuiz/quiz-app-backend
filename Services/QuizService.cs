@@ -22,7 +22,7 @@ public class QuizService : IQuizService
 
     public IEnumerable<string> GetQuestionIds(string QuizId)
     {
-        IEnumerable<string> quizzes = from Question in  _context.Questions where Question.QuizId == QuizId select Question.Id;
+        IEnumerable<string> quizzes = from Question in _context.Questions where Question.QuizId == QuizId select Question.Id;
         return quizzes;
     }
 
@@ -56,7 +56,7 @@ public class QuizService : IQuizService
         {
             Id = Nanoid.Nanoid.Generate(),
             Title = createQuestionDto.Title,
-            QuizId= createQuestionDto.QuizId,
+            QuizId = createQuestionDto.QuizId,
             Answers = new List<Answer>()
         };
 
@@ -67,20 +67,21 @@ public class QuizService : IQuizService
                 Id = Nanoid.Nanoid.Generate(),
                 Title = item.Title,
                 IsCorrect = item.IsCorrect,
-                questionId = item.QuestionId,
+                questionId = question.Id,
             };
             question.Answers.Add(answer);
         }
 
         _context.Questions.Add(question);
         _context.SaveChanges();
-       
+
         return question.Id;
     }
 
     public string CreateGame(string QuizId, string UserId)
     {
-        var _game = new Game{
+        var _game = new Game
+        {
             Id = Nanoid.Nanoid.Generate(),
             QuizId = QuizId,
             UserID = UserId
@@ -88,44 +89,53 @@ public class QuizService : IQuizService
 
         _context.Add(_game);
         _context.SaveChanges();
-        
+
         return _game.Id;
     }
 
     public string SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId)
     {
         bool AnswerCorrect = false;
-        
+
         var game = _context.Games
                     .Where(b => b.Id == submitAnswerDto.GameId)
                     .FirstOrDefault();
+        if (game != null)
+        {
+            if (game.UserID == UserId)
+            {
 
-        if(game.UserID == UserId){
+                var answer = _context.Answers.Where(b => b.Id == submitAnswerDto.AnswerId).FirstOrDefault();
+                if (answer.IsCorrect)
+                {
+                    AnswerCorrect = true;
+                }
 
-            var answer = _context.Answers.Where(b => b.Id == submitAnswerDto.AnswerId).FirstOrDefault();
-            if(answer.IsCorrect){
-                AnswerCorrect = true;
-            }
-                
-            var score = new Score{
-                Id = Nanoid.Nanoid.Generate(),
-                AnswerCorrect = AnswerCorrect,
-                GameId = submitAnswerDto.GameId,
-            };
-            _context.Add(score);
-            _context.SaveChanges();
-            if(AnswerCorrect){
-                return "Correct Answer";
+                var score = new Score
+                {
+                    Id = Nanoid.Nanoid.Generate(),
+                    AnswerCorrect = AnswerCorrect,
+                    GameId = submitAnswerDto.GameId,
+                };
+                _context.Add(score);
+                _context.SaveChanges();
+                if (AnswerCorrect)
+                {
+                    return "Correct Answer";
 
+                }
+                else
+                {
+                    return "Not Correct Answer";
+                }
             }
-            else{
-                return "Not Correct Answer";
-            }
+            return "Not your game";
+
         }
-        return "Not your game";
+        else return "Game does not exist";
 
 
     }
-    
+
 
 }
