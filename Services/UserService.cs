@@ -213,7 +213,7 @@ namespace quiz_app_backend.Services
 
         public string GetMyLevel(string Id)
         {
-            IEnumerable<Game> games = (from Game in _context.Games where Game.UserID == Id select Game).Include(b => b.Scores);
+            IEnumerable<Game> games=  (from Game in _context.Games where Game.UserID == Id select Game).Include(b => b.Scores);
             
             int _score = 0;
 
