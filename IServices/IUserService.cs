@@ -10,6 +10,5 @@ namespace quiz_app_backend.IServices
         Task<(string, bool)> ForgotPassword(ForgotPasswordDto forgotPasswordDto);
         Task<(string, bool)> ResetPassword(PasswordResetDto resetPasswordDto);
 
-
     }
 }

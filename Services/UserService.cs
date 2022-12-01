@@ -210,5 +210,6 @@ namespace quiz_app_backend.Services
             }
             return token;
         }
+
     }
 }

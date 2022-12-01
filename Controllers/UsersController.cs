@@ -76,5 +76,14 @@ namespace quiz_app_backend.Controllers
             }
             else return BadRequest(_resetPassword.Item1);
         }
+
+        [HttpGet("getMyUsername")]
+        public string GetMyUsername()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var userName = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
+
+            return userName;
+        }
     }
 }
