@@ -78,12 +78,11 @@ namespace quiz_app_backend.Controllers
         }
 
         [HttpGet("getMyUsername")]
-        public string GetMyUsername()
+        public IActionResult GetMyUsername()
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            var userName = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-
-            return userName;
+            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return Ok(Id);
         }
     }
 }

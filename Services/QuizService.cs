@@ -1,4 +1,5 @@
-﻿using quiz_app_backend.IServices;
+﻿using System.Security;
+using quiz_app_backend.IServices;
 using quiz_app_backend.Models;
 using quiz_app_backend.Dtos;
 using Microsoft.EntityFrameworkCore;
@@ -14,34 +15,34 @@ public class QuizService : IQuizService
         _configuration = configuration;
         _context = context;
     }
-    public IEnumerable<Quiz> GetQuizzes()
+    public Task<IEnumerable<Quiz>> GetQuizzes()
     {
         IEnumerable<Quiz> quizzes = from Quiz in _context.Quizzes select Quiz;
-        return quizzes;
+        return Task.FromResult(quizzes) ;
     }
 
-    public IEnumerable<Quiz> GetMyQuizzes(string UserId)
+    public Task<IEnumerable<Quiz>> GetMyQuizzes(string UserId)
     {
         IEnumerable<Quiz> quizzes = from Quiz in _context.Quizzes where Quiz.UserId == UserId select Quiz;
-        return quizzes;
+        return Task.FromResult(quizzes) ;
     }
 
-    public IEnumerable<string> GetQuestionIds(string QuizId)
+    public Task<IEnumerable<string>> GetQuestionIds(string QuizId)
     {
-        IEnumerable<string> quizzes = from Question in _context.Questions where Question.QuizId == QuizId select Question.Id;
-        return quizzes;
+        IEnumerable<string> questions = from Question in _context.Questions where Question.QuizId == QuizId select Question.Id;
+        return Task.FromResult(questions) ;
     }
 
-    public Question GetQuestion(string QuestionId)
+    public Task<Question> GetQuestion(string QuestionId)
     {
         var question = _context.Questions
                     .Where(b => b.Id == QuestionId).Include(b => b.Answers)
                     .FirstOrDefault();
 
-        return question;
+        return Task.FromResult(question);
     }
 
-    public string CreateQuiz(CreateQuizDto createQuestionDto, string UserId)
+    public Task<string> CreateQuiz(CreateQuizDto createQuestionDto, string UserId)
     {
         var quiz = new Quiz
         {
@@ -53,10 +54,10 @@ public class QuizService : IQuizService
         _context.SaveChanges();
         _context.SaveChanges();
 
-        return quiz.Id;
+        return Task.FromResult(quiz.Id);
     }
 
-    public string CreateQuestion(CreateQuestionDto createQuestionDto)
+    public Task<string> CreateQuestion(CreateQuestionDto createQuestionDto)
     {
         var question = new Question
         {
@@ -81,10 +82,10 @@ public class QuizService : IQuizService
         _context.Questions.Add(question);
         _context.SaveChanges();
 
-        return question.Id;
+        return Task.FromResult(question.Id);
     }
 
-    public string CreateGame(string QuizId, string UserId)
+    public Task<string> CreateGame(string QuizId, string UserId)
     {
         var _game = new Game
         {
@@ -96,10 +97,10 @@ public class QuizService : IQuizService
         _context.Add(_game);
         _context.SaveChanges();
 
-        return _game.Id;
+        return Task.FromResult(_game.Id);
     }
 
-    public string SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId)
+    public Task<string> SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId)
     {
         bool AnswerCorrect = false;
 
@@ -129,27 +130,27 @@ public class QuizService : IQuizService
                     _context.SaveChanges();
                     if (AnswerCorrect)
                     {
-                        return "Correct Answer";
+                        return Task.FromResult("Correct Answer");
 
                     }
                     else
                     {
-                        return "Not Correct Answer";
+                        return Task.FromResult ("Not Correct Answer");
                     }
                 }
-                else return "Answer does not exist";
+                else return Task.FromResult ("Answer does not exist");
 
 
             }
-            return "Not your game";
+            return Task.FromResult ("Not your game");
 
         }
-        else return "Game does not exist";
+        else return Task.FromResult ("Game does not exist");
 
 
     }
 
-    public FinishGameDto FinishGame(string GameId, string UserId)
+    public Task<FinishGameDto> FinishGame(string GameId, string UserId)
     {
         var game = _context.Games
                     .Where(b => b.Id == GameId)
@@ -171,9 +172,8 @@ public class QuizService : IQuizService
         };
 
         //Todo: Set game to finished
-        return finishGameDto;
+        return Task.FromResult(finishGameDto);
 
     }
-
 
 }

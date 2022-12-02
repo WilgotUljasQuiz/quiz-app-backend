@@ -25,31 +25,24 @@ namespace quiz_app_backend.Controllers
         }
 
         [HttpGet("getQuizzes")]
-        public IEnumerable<Quiz> GetQuizzes()
+        public async Task<IEnumerable<Quiz>> GetQuizzes()
         {
-           return _quizService.GetQuizzes();
+           return await _quizService.GetQuizzes();
         }
-
-        [HttpGet("getMyQuizzes"), Authorize]
-        public IEnumerable<Quiz> GetMyQuizzes()
-        {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return _quizService.GetMyQuizzes(Id);
-        }
-        
 
         [HttpGet("getQuestionIds")]
-        public IEnumerable<string> GetQuestionIds(string quizId)
+        public async Task<IEnumerable<string>> GetQuestionIds(string quizId)
         {
-           return _quizService.GetQuestionIds(quizId);
+           return await _quizService.GetQuestionIds(quizId);
         }
 
         [HttpGet("getQuestion")]
-        public Question GetQuestion(string questionId)
+        public async Task<Question> GetQuestion(string questionId)
         {
-           return _quizService.GetQuestion(questionId);
+           return await _quizService.GetQuestion(questionId);
         }
+
+
 
 
         [HttpPost("createQuiz"), Authorize]
@@ -58,13 +51,13 @@ namespace quiz_app_backend.Controllers
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            return _quizService.CreateQuiz(createQuizDto, Id);
+            return await _quizService.CreateQuiz(createQuizDto, Id);
         }
 
         [HttpPost("createQuestion"), Authorize]
         public async Task<string> CreateQuestion(CreateQuestionDto createQuestionDto)
         {
-            return _quizService.CreateQuestion(createQuestionDto);
+            return await _quizService.CreateQuestion(createQuestionDto);
         }
 
         [HttpPost("createGame"), Authorize]
@@ -72,7 +65,7 @@ namespace quiz_app_backend.Controllers
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return _quizService.CreateGame(QuizId, Id);
+            return await _quizService.CreateGame(QuizId, Id);
         }
 
         [HttpPost("submitAnswer"), Authorize]
@@ -80,15 +73,7 @@ namespace quiz_app_backend.Controllers
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return _quizService.SubmitAnswer(submitAnswerDto, Id);
-        }
-
-        [HttpPost("finishGame"), Authorize]
-        public async Task<FinishGameDto> FinishGame(string GameId)
-        {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return _quizService.FinishGame(GameId, Id);
+            return await _quizService.SubmitAnswer(submitAnswerDto, Id);
         }
     }
 }

@@ -174,3 +174,4 @@ C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Microsoft.As
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings (7).json

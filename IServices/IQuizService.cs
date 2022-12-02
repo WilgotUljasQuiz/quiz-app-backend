@@ -11,15 +11,15 @@ namespace quiz_app_backend.IServices
 {
     public interface IQuizService
     {
-        IEnumerable<Quiz> GetQuizzes();
-        IEnumerable<Quiz> GetMyQuizzes(string UserId);
-        IEnumerable<string> GetQuestionIds(string quizId);
-        Question GetQuestion(string questionId);
-        string CreateQuiz(CreateQuizDto createQuestionDto, string UserId);
-        string CreateQuestion(CreateQuestionDto createQuestionDto);
-        string CreateGame(string QuizId, string UserId);
-        string SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId); 
-        FinishGameDto FinishGame(string GameId, string UserId); 
+        Task<IEnumerable<Quiz>> GetQuizzes();
+        Task<IEnumerable<Quiz>> GetMyQuizzes(string UserId);
+        Task<IEnumerable<string>> GetQuestionIds(string quizId);
+        Task<Question> GetQuestion(string questionId);
+        Task<string> CreateQuiz(CreateQuizDto createQuestionDto, string UserId);
+        Task<string> CreateQuestion(CreateQuestionDto createQuestionDto);
+        Task<string> CreateGame(string QuizId, string UserId);
+        Task<string> SubmitAnswer(SubmitAnswerDto submitAnswerDto, string UserId); 
+        Task<FinishGameDto> FinishGame(string GameId, string UserId); 
 
 
     }
