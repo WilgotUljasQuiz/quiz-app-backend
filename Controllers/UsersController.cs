@@ -76,23 +76,5 @@ namespace quiz_app_backend.Controllers
             }
             else return BadRequest(_resetPassword.Item1);
         }
-
-<<<<<<< HEAD
-        [HttpGet("getMyUsername")]
-        public IActionResult GetMyUsername()
-        {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return Ok(Id);
-=======
-        [HttpGet("getMyLevel"), Authorize]
-        public async Task<IActionResult> GetMyLevel()
-        {
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
-            return Ok(_userService.GetMyLevel(Id));
->>>>>>> 07a424ac40dae83cb0304112108138b7f7aad066
-        }
     }
 }

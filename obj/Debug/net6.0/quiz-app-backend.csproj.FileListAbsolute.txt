@@ -168,18 +168,12 @@ C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Microsoft.As
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Scrutor.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings.Development.json
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings.json
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 <<<<<<< HEAD
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings (7).json
 =======
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.quiz-app-backend.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.build.quiz-app-backend.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.quiz-app-backend.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.quiz-app-backend.props
-C:\Programmering\Projekt\quiz-app\quiz-app-backend\obj\Debug\net6.0\staticwebassets.pack.json
 >>>>>>> 07a424ac40dae83cb0304112108138b7f7aad066
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings.Development.json
+C:\Programmering\Projekt\quiz-app\quiz-app-backend\bin\Debug\net6.0\appsettings.json
