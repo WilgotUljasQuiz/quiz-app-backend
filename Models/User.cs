@@ -10,6 +10,7 @@ namespace quiz_app_backend.Models
         [Required]
         public string Email { get; set; }
         public string Role { get; set; }
+        public DateTime CreatedAt { get; set; }
         public ICollection<Quiz> Quizzes { get; set; }
         public ICollection<Game> Games { get; set; }
 
