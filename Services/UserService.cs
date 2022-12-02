@@ -211,5 +211,26 @@ namespace quiz_app_backend.Services
             return token;
         }
 
+        public string GetMyLevel(string Id)
+        {
+            IEnumerable<Game> games=  (from Game in _context.Games where Game.UserID == Id select Game).Include(b => b.Scores);
+            
+            int _score = 0;
+
+            int _level;
+
+            foreach (Game game in games){
+
+                foreach (var item in game.Scores){
+                    if(item.AnswerCorrect){
+                        _score++;
+                    }
+                }
+            }
+
+            _level = 1 + _score/5;
+
+            return _level.ToString();
+        }
     }
 }
