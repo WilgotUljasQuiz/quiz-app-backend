@@ -22,10 +22,8 @@ namespace quiz_app_backend.Services
             _context = context;
             _mailService = mailService;
         }
-        public Task<(LoginReturnDto, bool)> Login(LoginDto loginDto)
+        public async Task<(string, bool)> Login(LoginDto loginDto)
         {
-            var dto = new LoginReturnDto();
-
             var data = _context.Users;
             var query = from user in data
                         where user.Username == loginDto.Username
@@ -34,34 +32,23 @@ namespace quiz_app_backend.Services
             User _user = (query.First());
             if (query.Count() > 0)
             {
-
                 try
                 {
                     if (Identify(loginDto.Password, _user))
                     {
-                        dto.Jwt = CreateJWT(_user);
-                        dto.CreatedAt = _user.CreatedAt.ToString();
-                        return Task.FromResult((dto, true));
+                        return (CreateJWT(_user), true);
                     }
-                    else
-                    {
-                        dto.Jwt = "Wrong Password";
-
-                        return Task.FromResult((dto, false));
-                    }
-
+                    else return ("Wrong password", false);
                 }
                 catch (Exception e)
                 {
-                    dto.Jwt = e.ToString();
-                    return Task.FromResult((dto, false));
+                    return (e.Message, false);
                 }
 
             }
             else
             {
-                dto.Jwt = "User not found";
-                return Task.FromResult((dto, false));
+                return ("User not found", false);
             }
 
 
@@ -85,8 +72,7 @@ namespace quiz_app_backend.Services
                     Email = userDto.Email,
                     Role = _role,
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password, salt),
-                    Id = CreateToken("user"),
-                    CreatedAt = DateTime.Now
+                    Id = CreateToken("user")
                 };
 
 
@@ -213,41 +199,17 @@ namespace quiz_app_backend.Services
                         if ((_context.Users?.Any(e => e.ResetToken == token)).GetValueOrDefault())
                             exists = true;
                         else exists = false;
-                        break;
+                    break;
 
                     case "user":
                         if ((_context.Users?.Any(e => e.Id == token)).GetValueOrDefault())
                             exists = true;
                         else exists = false;
-                        break;
+                    break;
                 }
             }
             return token;
         }
 
-        public string GetMyLevel(string Id)
-        {
-            IEnumerable<Game> games = (from Game in _context.Games where Game.UserID == Id select Game).Include(b => b.Scores);
-
-            int _score = 0;
-
-            int _level;
-
-            foreach (Game game in games)
-            {
-
-                foreach (var item in game.Scores)
-                {
-                    if (item.AnswerCorrect)
-                    {
-                        _score++;
-                    }
-                }
-            }
-
-            _level = 1 + _score / 5;
-
-            return _level.ToString();
-        }
     }
 }

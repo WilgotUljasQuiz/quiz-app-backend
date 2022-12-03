@@ -14,7 +14,8 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseSqlServer(Configuration.GetConnectionString("WebApiDatabaseLocal"));
+        // connect to sql server with connection string from app settings
+        options.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase"));
     }
 
     public DbSet<User> Users { get; set; }
