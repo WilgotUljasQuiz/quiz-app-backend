@@ -77,14 +77,13 @@ namespace quiz_app_backend.Controllers
             else return BadRequest(_resetPassword.Item1);
         }
 
-        [HttpGet("getMyUsername")]
-        public IActionResult GetMyUsername()
+        [HttpGet("getMyStats")]
+        public Task<StatsDto> GetMyStats()
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return Ok(Id);
+            return _userService.GetMyStats(Id);
         }
-
 
     }
 }
