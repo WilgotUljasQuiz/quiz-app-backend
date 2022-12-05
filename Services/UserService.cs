@@ -224,7 +224,7 @@ namespace quiz_app_backend.Services
         }
         private string GetCreatedAccountAt(string Id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == Id);
+            var user = _context.Users.Where(u => u.Id == Id).FirstOrDefault();
             return user.CreatedAccountAt.ToString();
         }
 
