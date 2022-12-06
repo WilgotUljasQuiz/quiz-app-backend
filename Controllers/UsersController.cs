@@ -88,7 +88,7 @@ namespace quiz_app_backend.Controllers
 
 
         [HttpGet("getMyQuizzes"), Authorize]
-        public async IEnumerable<Quiz> GetMyQuizzes()
+        public async Task<IEnumerable<Quiz>> GetMyQuizzes()
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
