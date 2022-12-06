@@ -88,11 +88,11 @@ namespace quiz_app_backend.Controllers
 
 
         [HttpGet("getMyQuizzes"), Authorize]
-        public IEnumerable<Quiz> GetMyQuizzes()
+        public async IEnumerable<Quiz> GetMyQuizzes()
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return _userService.GetMyQuizzes(Id);
+            return await _userService.GetMyQuizzes(Id);
         }
 
     }

@@ -256,7 +256,6 @@ namespace quiz_app_backend.Services
         public Task<IEnumerable<Quiz>> GetMyQuizzes(string UserId)
         {
             IEnumerable<Quiz> quizzes = from Quiz in _context.Quizzes where Quiz.UserId == UserId select Quiz;
-            return quizzes;
             return Task.FromResult(quizzes);
         }
     }
