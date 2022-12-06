@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using quiz_app_backend.Dtos;
 using quiz_app_backend.IServices;
+using quiz_app_backend.Models;
 
 namespace quiz_app_backend.Controllers
 {
@@ -77,12 +78,21 @@ namespace quiz_app_backend.Controllers
             else return BadRequest(_resetPassword.Item1);
         }
 
-        [HttpGet("getMyStats")]
+        [HttpGet("getMyStats"), Authorize]
         public Task<StatsDto> GetMyStats()
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
             var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return _userService.GetMyStats(Id);
+        }
+
+
+        [HttpGet("getMyQuizzes"), Authorize]
+        public IEnumerable<Quiz> GetMyQuizzes()
+        {
+            var claimsIdentity = this.User.Identity as ClaimsIdentity;
+            var Id = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return _userService.GetMyQuizzes(Id);
         }
 
     }
